@@ -13,7 +13,7 @@ import com.cg.DAO.DaoBuyerImpl;
 import com.cg.DAO.DaoImpl;
 import com.cg.DAO.DaoSeller;
 import com.cg.DAO.DaoSellerImpl;
-import com.cg.DAO.StaticDB;
+
 import com.cg.DTO.Filter;
 import com.cg.DTO.InterestList;
 import com.cg.DTO.Property;
@@ -70,7 +70,7 @@ public class ServiceImpl implements Service{
 		}
 		else {
 			for(Property prop:allProperties) {
-				if(user.equals(prop.getOwner()))
+				if(user.getLoginId().equals(prop.getOwner().getLoginId()))
 					properties.add(prop);
 			}
 		}
