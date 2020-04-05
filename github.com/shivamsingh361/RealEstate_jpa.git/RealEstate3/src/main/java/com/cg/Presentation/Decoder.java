@@ -2,7 +2,6 @@ package com.cg.Presentation;
 
 import com.cg.DTO.PropertyType;
 import com.cg.DTO.UserType;
-import com.cg.exception.UserException;
 
 public class Decoder {
 	public PropertyType decodeType(String input) {
@@ -14,13 +13,13 @@ public class Decoder {
 		}
 		switch (key) {
 		case 1:
-			return PropertyType.APPARTMENT;
+			return PropertyType.VILLA;
 		case 2:
 			return PropertyType.FLAT;
 		case 3:
-			return PropertyType.HOUSE;
+			return PropertyType.APPARTMENT;
 		case 4:
-			return PropertyType.VILLA;
+			return PropertyType.HOUSE;
 		default:
 			return PropertyType.HOUSE;
 		}

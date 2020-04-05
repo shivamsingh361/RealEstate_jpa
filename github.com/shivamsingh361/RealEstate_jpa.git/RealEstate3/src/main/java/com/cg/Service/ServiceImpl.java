@@ -3,6 +3,10 @@ package com.cg.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import com.cg.DAO.Dao;
 import com.cg.DAO.DaoBuyer;
 import com.cg.DAO.DaoBuyerImpl;
@@ -11,6 +15,7 @@ import com.cg.DAO.DaoSeller;
 import com.cg.DAO.DaoSellerImpl;
 import com.cg.DAO.StaticDB;
 import com.cg.DTO.Filter;
+import com.cg.DTO.InterestList;
 import com.cg.DTO.Property;
 import com.cg.DTO.User;
 import com.cg.DTO.UserType;
@@ -136,22 +141,20 @@ public class ServiceImpl implements Service{
 
 	@Override
 	public Property viewProperty(String propId) {
-
-		Property prop = buyerDao.getPropertyById(propId);
-		if(prop != null) {
-			if(StaticDB.getInterestList().get(user) != null) {
-				StaticDB.getInterestList().get(user).add(prop);
-			}
-			else {
-				List<Property> list = new ArrayList<Property>();
-				list.add(prop);
-				StaticDB.getInterestList().put(user,list);
-			}
-			return prop;	
+		Property prop = null;
+		try {
+			prop = buyerDao.getPropertyById(propId);
+		} catch (PropertyException e) {
+			e.printStackTrace();
 		}
-		else {
-			throw new PropertyException("Invalid Property ID");
-		}
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("RealEstate3");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(new InterestList(user.getLoginId(), prop.getCity(), Integer.parseInt(propId)));
+		em.getTransaction().commit();
+		em.close();
+		emf.close();
+		return prop;	
 	}
 
 }

@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -17,9 +19,11 @@ public class Property implements Serializable{
 	@Column(name="prop_address")
 	private Address propAddress;
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO) 
+	//@SequenceGenerator(name="myseq",sequenceName="prop_id") 
 	@Column(name="prop_id")
-	private  String propId;
-	private static int propCounter = 0;
+	private  int propId;
+	//private static int propCounter = 0;
 	@Column(name="prop_price")
 	private String propPrice;
 	@Column(name="prop_landmark")
@@ -39,7 +43,7 @@ public class Property implements Serializable{
 			PropertyType type) {
 		super();
 		this.propAddress = propAddress;
-		this.propId = Integer.toString(propCounter++);
+		//this.propId = Integer.toString(propCounter++);
 		this.propPrice = propPrice;
 		this.landmark = landmark;
 		this.propDescription = propDescription;
@@ -57,10 +61,10 @@ public class Property implements Serializable{
 				+ ", landmark=" + landmark + ", propDescription=" + propDescription + ", type=" + type + "]+\n";
 	}
 	public String getPropId() {
-		return propId;
+		return propId+"";
 	}
 	public void setPropId(String propId) {
-		this.propId = propId;
+		this.propId = Integer.parseInt(propId);
 	}
 	public String getPropPrice() {
 		return propPrice;
@@ -74,12 +78,7 @@ public class Property implements Serializable{
 	public void setPropAddress(Address propAddress) {
 		this.propAddress = propAddress;
 	}
-	public static int getPropCounter() {
-		return propCounter;
-	}
-	public static void setPropCounter(int propCounter) {
-		Property.propCounter = propCounter;
-	}
+
 	public String getPropDescription() {
 		return propDescription;
 	}
