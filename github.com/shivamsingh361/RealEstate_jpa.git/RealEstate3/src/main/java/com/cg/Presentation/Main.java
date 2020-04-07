@@ -1,6 +1,7 @@
 package com.cg.Presentation;
 
 import java.util.Scanner;
+import java.util.logging.Level;
 
 import org.omg.CORBA.DynAnyPackage.Invalid;
 
@@ -18,6 +19,7 @@ import com.cg.exception.PropertyException;
 public class Main {
 
 	public static void main(String[] args) {
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		Service obj = new ServiceImpl();
 		Decoder decode = new Decoder();
 		do{

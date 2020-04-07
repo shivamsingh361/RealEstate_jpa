@@ -14,8 +14,10 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 			<property name="javax.persistence.jdbc.password"
 				value="123456789s" />
 			<property name="javax.persistence.jdbc.driver"
-				value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.show_sql" value="true" />
+				value="com.mysql.cj.jdbc.Driver" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.generate_statistics" value="false"/>
+			<property name="hibernate.use_sql_comments" value="false"/>
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL5InnoDBDialect" />

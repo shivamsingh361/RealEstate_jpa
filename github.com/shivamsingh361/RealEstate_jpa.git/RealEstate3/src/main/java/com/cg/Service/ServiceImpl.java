@@ -136,7 +136,14 @@ public class ServiceImpl implements Service{
 
 	@Override
 	public List<Property> deleteProperty(String propId) {
-		return sellerDao.deleteProperty(propId);
+		try {
+			if(user.equals(sellerDao.getProperty(propId).getOwner()))
+				return sellerDao.deleteProperty(propId);
+		} catch (UserException e) {
+			System.out.println("> Please! Enter a correct ID");
+			e.printStackTrace();
+		}
+		return userHome();
 	}
 
 	@Override

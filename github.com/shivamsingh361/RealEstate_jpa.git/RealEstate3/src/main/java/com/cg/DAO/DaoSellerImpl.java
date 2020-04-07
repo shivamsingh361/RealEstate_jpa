@@ -45,5 +45,16 @@ public class DaoSellerImpl implements DaoSeller {
 		emf.close();		
 		return propList;
 	}
+	@Override
+	public Property getProperty(String propId) {
+		emf = Persistence.createEntityManagerFactory("RealEstate3");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Property property = em.find(Property.class, Integer.parseInt(propId));
+		em.getTransaction().commit();		
+		em.close();
+		emf.close();		
+		return property;
+	}
 
 }

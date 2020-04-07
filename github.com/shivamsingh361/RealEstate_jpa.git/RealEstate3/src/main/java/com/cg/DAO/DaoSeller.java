@@ -8,4 +8,5 @@ public interface DaoSeller {
 
 	List<Property> addProperty(Property property);
 	List<Property> deleteProperty(String propId);
+	Property getProperty(String propId);
 }
